@@ -10,13 +10,13 @@ Asynchronous API to simulate slow requests for client testing purposes
 ### Python 「[aiohttp](https://github.com/aio-libs/aiohttp)」
 
 ```py
-import aiohttp
 import asyncio
+from aiohttp import ClientSession, TCPConnector
 
 async def main():
-    delay_ms: int = 2000
+    delay_ms = 2000
     url = f"https://127.0.0.1:8080/v1/slow?delay={delay_ms}"
-    session = aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=False))
+    session = ClientSession(connector=TCPConnector(ssl=False))
 
     async with session.get(url) as resp:
         resp = await resp.text()
